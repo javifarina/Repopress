@@ -1,0 +1,122 @@
+<h1>Configuración de Bolsa</h1>
+<hr />
+<form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+    <input type="hidden" name="id" #id="ngModel" [(ngModel)]="formData.id" />
+    <input type="hidden" name="idPedido" #idPedido="ngModel" [(ngModel)]="formData.idPedido" />
+
+    <input type="hidden" name="peso" #peso="ngModel" [(ngModel)]="formData.peso" />
+    <input type="hidden" class="form-control" name="valmaterial" #valmaterial="ngModel" [(ngModel)]="formData.valmaterial" />
+
+    <div class="form-group">
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                <label>Ancho</label>
+                <input type="number" class="form-control" name="ancho" #ancho="ngModel" [(ngModel)]="formData.ancho" (keyup)="CalcularTotal()" [class.is-invalid]="!isValid && formData.ancho <= 0" />
+            </div>
+            <div class="form-group col-md-2">
+                <label>Alto</label>
+                <input type="number" class="form-control" name="alto" #alto="ngModel" [(ngModel)]="formData.alto" (keyup)="CalcularTotal()" [class.is-invalid]="!isValid && formData.alto <= 0" />
+            </div>
+
+            <div class="form-group col-md-2">
+                <label>Espesor .Mic</label>
+                <input type="number" class="form-control" name="espesor" #espesor="ngModel" [(ngModel)]="formData.espesor" (keyup)="CalcularTotal()" [class.is-invalid]="!isValid && formData.espesor <= 0" />
+            </div>
+            <div class="form-grop col-md-4">
+                <label>Material</label><br />
+                <select name="idTipoMaterial" #idTipoMaterial="ngModel" class="form-control" [(ngModel)]="formData.idTipoMaterial" (change)="getValorMat($event.target)" [class.is-invalid]="!isValid && formData.idTipoMaterial == 0">
+                    <option value="0 ">-Seleciones-</option>
+                    <option *ngFor="let items of material" value="{{ items.id }}">
+                                     {{ items.tipoMaterial }}
+                    </option>
+                </select>
+            </div>
+
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                <label>Cantidad</label>
+                <input type="number " class="form-control" name="cantidad" #cantidad [(ngModel)]="formData.cantidad" />
+            </div>
+            <div class="form-group col-md-2">
+                <label>Precio x Peso</label>
+                <input type="number " class="form-control" name="precio" #precio="ngModel" [(ngModel)]="formData.precio" (keyup)="CalcularTotal()" [class.is-invalid]="!isValid && formData.precio <= 0" />
+            </div>
+
+            <div class="form-group col-md-2">
+                <label>Color Bolsa</label>
+                <input type="text" class="form-control" name="color1" #color1="ngModel" [(ngModel)]="formData.color1" />
+                <input type="hidden" class="form-control" name="color2" #color2="ngModel" [(ngModel)]="formData.color2" />
+            </div>
+            <div class="form-grop col-md-4">
+                <label>Tipo de Corte</label><br />
+                <select name="idTipoCorte" #idTipoCorte class="form-control" [(ngModel)]="formData.idTipoCorte">
+                    <option value="0">-Selecione Tipo Corte</option>
+                    <option *ngFor="let itemcorte of corte" value="{{ itemcorte.id }}">
+                               {{ itemcorte.tipoCorte }}
+                    </option>
+                </select>
+            </div>
+
+        </div>
+        <div class="form-group">
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="customSwitch4" name="fuelle" #fuelle="ngModel" [(ngModel)]="formData.fuelle" />
+                <label class="custom-control-label" for="customSwitch4">Tiene Fuelle</label><br/>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" name="precio100" #precio100="ngModel" [(ngModel)]="formData.precio100" />
+    <input type="hidden" class="form-control" name="especialidad" #especialidad="ngModel" [(ngModel)]="formData.especialidad" />
+    <div class="form-row">
+        <h1>Impresión</h1>
+    </div>
+    <hr>
+    <div class="form-group">
+        <div class="custom-control custom-switch">
+            <input type="checkbox" class="custom-control-input" id="customSwitch3" name="impresion" #impresion="ngModel" [(ngModel)]="formData.impresion" />
+            <label class="custom-control-label" for="customSwitch3">Impresion</label><br/>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="form-group" *ngIf="formData.impresion==true">
+            <div class="form-row">
+                <div class=" col-md-4">
+                    <label>Motivo</label>
+                    <input type="number " class="form-control" name="motivo" #motivo [(ngModel)]="formData.motivo" />
+                </div>
+                <div class=" col-md-2">
+                    <label>Especialidad</label>
+                    <input type="number " class="form-control" name="especialidad" #especialidad="ngModel" [(ngModel)]="formData.especialidad" />
+                </div>
+                <div class=" col-md-2">
+                    <label>Cantidad Color en Bolsa</label>
+                    <input type="number" class="form-control" name="color1Cantidad" #color1="ngModel" [(ngModel)]="formData.color1Cantidad" />
+                    <input type="hidden" class="form-control" name="color2" #color2="ngModel" [(ngModel)]="formData.color2" />
+                </div>
+            </div>
+
+        </div>
+        <div class="form-group">
+
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="customSwitch2" name="dobleCara" #dobleCara="ngModel" [(ngModel)]="formData.dobleCara" />
+                <label class="custom-control-label" for="customSwitch2">Impresion Ambas caras</label><br />
+            </div>
+        </div>
+    </div>
+
+
+    <hr/>
+    <div class="form-group">
+        <button type="submit" class="btn btn btn-dark">
+      <i class="fa fa-database"></i> Grabar
+    </button>
+        <button type="button" class="btn btn-outline-dark ml-5" [mat-dialog-close]>
+      <i class="fa fa-close"></i> Cancelar
+    </button>
+    </div>
+</form>
+<pre>{{formData | json}}</pre>

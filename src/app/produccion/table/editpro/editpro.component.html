@@ -1,0 +1,56 @@
+<h4 class="">Número de Pedido:<strong>1465651654</strong></h4>
+<h4 class="">Fecha de Pedido:<strong>04/02/2021</strong></h4>
+<form autocomplete autocomplete="off" [formGroup]='formaProd' (ngSubmit)="GuardarProd()">
+    <div class="form-group row">
+        <label class="col-2 col-form-label md-col-1">Nombre Cliente</label>
+        <div class="col-10">
+            <input class="form-control" type="text" formControlName="nombre" readonly>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-2 col-form-label md-col-1">Vendedor</label>
+        <div class="col-10">
+            <input class="form-control" type="text" formControlName="nombre" readonly>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-2 col-form-label md-col-1">Estado</label>
+        <div class="col-10">
+            <select name="idCliente" #id>
+                    <option value="0">-Presupuestado</option>
+                    <option value="1">-Aprobado a Prod</option>
+                    <option value="2">-En Deposito</option>
+                    <option value="3">-Entregado </option>
+            </select>
+        </div>
+    </div>
+
+    <table class="table table-striped">
+        <th>Medidas</th>
+        <th>Material</th>
+        <th>Cantidad</th>
+        <th>Color Bolsa</th>
+        <th>Corte</th>
+        <th>Fuelle</th>
+        <th>Peso</th>
+        <th>Impresion</th>
+        <th>Motivo</th>
+        <th>Cant. Color</th>
+        <th>Estado</th>
+
+        <tr>
+            <td>60 x 40</td>
+            <td>Alta Densidad</td>
+            <td>1000</td>
+            <td>Cristal</td>
+            <td>Camiseta</td>
+            <td>si</td>
+            <td>4896</td>
+            <td>si</td>
+            <td>La Avenidas</td>
+            <td>5</td>
+            <td>En Produccion</td>
+        </tr>
+
+    </table>
+</form>

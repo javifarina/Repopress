@@ -1,0 +1,66 @@
+<h2>Ordenes de Pedido por Clientes</h2>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Cliente:</label>
+            <select name="idCliente" class="form-control" (change)="obtenerCliente($event.target)">
+        <option value="0">-Seleccione un Cliente</option>
+        <option *ngFor="let item of cliente" value="{{ item.id }}">
+          {{ item.nombre }} {{ item.apellido }}
+        </option>
+      </select>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <a class="btn btn btn-outline-success float-right" routerLink="/pedido"><i class="fa fa-plus"></i> Pedido</a
+    >
+  </div>
+</div>
+<hr />
+<table class="table table-borderless">
+  <thead class="thead-light">
+    <th>Nro.</th>
+    <th>Nro. Pedido</th>
+    <th>fecha de Pedido</th>
+    <th>Vendedor</th>
+    <th>Estado</th>
+    <th>Imp.c Espesor</th>
+    <th>Imp.s Espesor</th>
+  </thead>
+  <tbody>
+    <tr *ngIf="!todos">
+        <td class="font-italic text-center" colspan="5">
+          Debe elegir un cliente ..!
+        </td>
+    </tr>
+    <tr *ngFor="let items of todos ">
+      <td>{{ items.id }}</td>
+      <td>{{ items.numero }}</td>
+      <td>{{ items.fechaPedido | date: "dd/MM/yyyy hh:mm:ss" }}</td>
+      <td>{{ items.nombreAgente }}</td>
+      <td><span class="badge badge-info">{{ items.seguimientoEstado}}</span></td>
+      <td>
+        <a
+          href="http://localhost:8180/api/documentos/pdf/con_espesor/{{ idCliente }}/{{
+            items.id
+          }}"
+          target="_blank"
+          class="btn btn-outline-danger"
+          ><i class="fa fa-print"></i></a
+        >  
+      </td>
+      <td>
+        <a
+          href="http://localhost:8180/api/documentos/pdf/sin_espesor/{{ idCliente }}/{{
+            items.id
+          }}"
+          target="_blank"
+          class="btn btn-outline-warning"
+          ><i class="fa fa-print"></i></a
+        >
+      </td>
+    </tr>
+  </tbody>
+</table>

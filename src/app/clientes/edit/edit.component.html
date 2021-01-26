@@ -1,0 +1,18 @@
+<H1>
+    Datos del Cliente</H1>
+<hr>
+<div>
+    <h3>Nombre y apellido {{clientelist.nombre}}, {{clientelist.apellido}}</h3>
+
+
+    <ul>
+        <li><strong>Fecha de Alta:</strong> {{clientelist.fechaAlta | date: 'dd/MM/yyyy' }}</li>
+        <li><strong>Email:</strong> {{clientelist.email}}</li>
+        <li><strong>Tel:</strong>{{clientelist.telefono1}}</li>
+        <li><strong>CUIT:</strong>{{clientelist.cuit}}</li>
+        <li><strong>Provincia:</strong> {{clientelist.provincia}}</li>
+        <li><strong>Loclidad:</strong>{{clientelist.localidad}}</li>
+        <li><strong>CP:</strong> {{ clientelist.codigoPostal}}</li>
+
+    </ul>
+</div>

@@ -1,0 +1,52 @@
+<div class="row" style="padding-top: 10px;">
+
+    <div class="col-lg-12">
+
+        <button class="btn btn-outline-success float-lg-right" [routerLink]="['/addcli/']"><i class="fa fa-plus"></i> Cliente</button>
+        <h1 class="">
+            Polimundi - <small> Listado de Cliente </small></h1>
+        <hr>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <input type="text" class="form-control" name="filtro" placeholder="Buscar por Nombre..!" [(ngModel)]="filtro">
+            </div>
+        </div>
+    </div>
+    <div class="spinner-border" role="status" *ngIf="loading">
+        <span class="sr-only">Cargando...</span>
+    </div>
+</div>
+<hr>
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Email</th>
+        <th>Telefono</th>
+        <th>CUIT</th>
+        <th></th>
+        <th></th>
+    </thead>
+    <tbody class="">
+        <tr *ngFor="let cliente of listaCliente | paginate:{itemsPerPage:12,currentPage:paginas} | filtroCliente:filtro">
+            <td>
+                <a [routerLink]="['/ver/',cliente.id]">{{cliente.nombre}}</a></td>
+            <td>{{cliente.apellido}}</td>
+            <td>{{cliente.email}}</td>
+            <td>{{cliente.telefono1}}</td>
+            <td>{{cliente.cuit}}</td>
+            <!--<td><button class="btn btn-primary btn-sm float-lg-right" [routerLink]="['/editar/',cliente.id]">Editar</button></td>-->
+
+            <td>
+                <a class="btn btn-sm btn-info text-white" [routerLink]="['/editar/',cliente.id]"><i class=" fa fa-pencil"></i></a></td>
+
+            <!--<td><button class="btn btn-danger btn-sm" (click)="delete(cliente.id)">Borrar</button></td>-->
+            <td>
+                <a class="btn btn-sm btn-danger text-white" (click)="delete(cliente.id)"><i class=" fa fa-trash"></i></a></td>
+        </tr>
+
+    </tbody>
+</table>
+<pagination-controls (pageChange)="paginas= $event"></pagination-controls>

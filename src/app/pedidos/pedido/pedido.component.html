@@ -1,0 +1,106 @@
+<form #form="ngForm" autocomplete="off" *ngIf="service.formData" (submit)="onSubmit(form)">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Nro Pedido</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">#</div>
+                    </div>
+                    <input class="form-control" name="numero" #numero="ngModel" [(ngModel)]="service.formData.numero" readonly/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Cliente</label>
+                <select name="idCliente" #idCliente="ngModel" [(ngModel)]="service.formData.idCliente" class="form-control" [class.is-invalid]="!isValid && service.formData.idCliente == 0">
+          <option value="0">-Seleccione un Cliente</option>
+          <option *ngFor="let item of cliente" value="{{ item.id }}">
+            {{ item.nombre }} {{ item.apellido }}
+          </option>
+        </select>
+            </div>
+            <div class="form-group">
+                <label>Observaciones</label>
+                <input type="text" name="observacion" #observacion="ngModel" [(ngModel)]="service.formData.observacion" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="hidden" name="diasVigencia" #diasVigencia="ngModel" [(ngModel)]="service.formData.diasVigencia" class="form-control" readonly/>
+            </div>
+            <div class="form-group">
+                <input type="hidden" name="formaPago" #formaPago="ngModel" [(ngModel)]="service.formData.formaPago" class="form-control" readonly/>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Fecha Pedido</label>
+                <input name="fechapedido" #fechapedido="ngModel" [ngModel]="service.formData.fechaPedido | date: 'MM/dd/yyyy'" class="form-control" readonly />
+            </div>
+            <div class="form-group">
+                <label>Agente</label>
+                <input name="idAgente" #idAgente="ngModel" [(ngModel)]="service.formData.idAgente" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="hidden" name="listaBolsas" #listaBolsas="ngModel" [(ngModel)]="service.formData.listaBolsas" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Valor Fotopolimero</label>
+                <input type="text" name="fotopolimero" #fotopolimero="ngModel" [(ngModel)]="service.formData.fotopolimero" class="form-control" />
+            </div>
+            <div class="form-group">
+
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="customSwitch1" name="coniva" #coniva="ngModel" [(ngModel)]="service.formData.conIva" />
+                    <label class="custom-control-label" for="customSwitch1">Impresión Con Iva</label><br />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6"></div>
+        <!--Tabla de Bolsas Items-->
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <th>Medidas</th>
+                <th>Espesor Mic</th>
+                <th>Material</th>
+                <th>Precio x 100</th>
+                <th>
+                    <a class="btn btn-sm btn-success text-white" (click)="AddOrEditBolsas(null, service.formData.id)"><i class="fa fa-plus"></i> Bolsas</a
+          >
+        </th>
+      </thead>
+      <tbody>
+        <tr
+          *ngIf="service.bolsaItems.length == 0"
+          [class.text-danger]="!isValid && service.bolsaItems.length == 0"
+        >
+          <td class="font-italic text-center" colspan="5">
+            No hay elementos cargados para Presupuestar ..!
+          </td>
+        </tr>
+        <tr *ngFor="let item of service.bolsaItems; let i = index">
+          <td>{{ item.ancho }} x {{item.alto }}</td>
+          <td>{{ item.espesor }}</td>
+          <td>{{ item.valmaterial }}</td>
+          <td>{{ item.precio100 }}</td>
+          <td>
+            <a
+              class="btn btn-sm btn-danger text-white"
+              (click)="deleteBolsas(item.id, i, service.formData.id)"
+              ><i class="fa fa-trash"></i
+            ></a>
+                    </td>
+                    </tr>
+                    </tbody>
+        </table>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-dark">
+        <i class="fa fa-database"></i>
+        Guardar
+      </button>
+            <div class="form-group float-lg-right">
+                <a class="btn btn-outline-dark " routerLink="/pedidos"><i class="fa fa-table"></i> Pedidos</a>
+            </div>
+        </div>
+    </div>
+</form>
+<pre>{{service.formData | json}}</pre>

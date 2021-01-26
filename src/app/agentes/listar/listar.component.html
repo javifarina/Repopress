@@ -1,0 +1,50 @@
+<div class="row" style="padding-top: 10px;">
+
+    <div class="col-lg-12">
+
+        <button class="btn btn-outline-success float-lg-right" [routerLink]="['/addAgente/']"><i class="fa fa-plus"></i>Agentes</button>
+        <h1 class="">
+            Polimundi - <small> Listado de Agentes</small></h1>
+        <hr>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <input type="text" class="form-control" name="filtro" placeholder="Buscar por Nombre..!" [(ngModel)]="filtro">
+            </div>
+        </div>
+    </div>
+    <div class="spinner-border" role="status" *ngIf="loading">
+        <span class="sr-only">Cargando...</span>
+    </div>
+</div>
+<hr>
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Nombre Usuario</th>
+        <th>Email</th>
+        <th>Rol</th>
+        <th></th>
+        <th></th>
+    </thead>
+    <tbody class="">
+        <tr *ngFor="let agente of listaAgente ">
+            <td>{{agente.nombre}}</td>
+            <td>{{agente.apellido}}</td>
+            <td>{{agente.nombreUsuario}}</td>
+            <td>{{agente.email}}</td>
+            <td>{{agente.rol}}</td>
+            <!--<td><button class="btn btn-primary btn-sm float-lg-right" [routerLink]="['/editar/',cliente.id]">Editar</button></td>-->
+
+            <td>
+                <a class="btn btn-sm btn-info text-white" [routerLink]="['/edit/',agente.id]"><i class=" fa fa-pencil"></i></a></td>
+
+            <!--<td><button class="btn btn-danger btn-sm" (click)="delete(cliente.id)">Borrar</button></td>-->
+            <td>
+                <a class="btn btn-sm btn-danger text-white" (click)="delete(agente.nombreUsuario)"><i class=" fa fa-trash"></i></a></td>
+        </tr>
+
+    </tbody>
+</table>

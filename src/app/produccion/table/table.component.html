@@ -1,0 +1,50 @@
+<H1>Producción</H1>
+<div class="mat-elevation-z8">
+    <mat-form-field>
+        <mat-label>Filtro</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ingrese Dato" #input>
+    </mat-form-field>
+
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> iD. </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="fechaPedido">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
+            <td mat-cell *matCellDef="let element"> {{element.fechaPedido |date: "dd/MM/yy"}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="numero">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> N° Pedido </th>
+            <td mat-cell *matCellDef="let element"> {{element.numero}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="apellidoCliente">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Cliente</th>
+            <td mat-cell *matCellDef="let element"> {{element.apellidoCliente}} </td>
+        </ng-container>
+        <ng-container matColumnDef="apellidoAgente">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Vendedor</th>
+            <td mat-cell *matCellDef="let element"> {{element.apellidoAgente}} </td>
+        </ng-container>
+        <ng-container matColumnDef="seguimientoEstado">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+            <td mat-cell *matCellDef="let element"><span class="badge badge-success"> {{element.seguimientoEstado}}</span> </td>
+        </ng-container>
+        <ng-container matColumnDef="editar">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Editar </th>
+            <td mat-cell *matCellDef="let element"><a class="btn btn-sm btn-info text-white" [routerLink]="['/editpro/',element.numero]"><i class=" fa fa-pencil"></i></a></td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
+</div>

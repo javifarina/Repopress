@@ -1,0 +1,141 @@
+<h1 class="">
+    Polimundi - <small> {{accion}} - Agente </small></h1>
+
+<hr>
+<form autocomplete="off" [formGroup]='formaAgente' (ngSubmit)="guardarAgente()">
+
+
+    <!--Formulario Espacio para nomnre -->
+    <div class="form-group row">
+        <label class="col-2 col-form-label md-col-1">Nombre</label>
+        <div class="col-10">
+            <input class="form-control" type="text" formControlName="nombre" [class.is-invalid]="nombreNoValido">
+            <small *ngIf="nombreNoValido" class="text-danger">
+                  Es Obligatorio Ingresar un Nombre
+                </small>
+        </div>
+    </div>
+    <!--Formulario Espacio para Apellido -->
+    <div class="form-group row">
+        <label class="col-2 col-form-label">Apellido</label>
+        <div class="col-10">
+
+            <input class="form-control" type="text" formControlName="apellido" [class.is-invalid]="apellidoNoValido">
+            <small *ngIf="apellidoNoValido" class="text-danger">
+                    Es obligatorio ingresar el Apellido
+                </small>
+
+        </div>
+    </div>
+    <!--Formulario Espacio para Nombre de Usuario -->
+    <div class="form-group row">
+        <label class="col-2 col-form-label">Nombre Usuario</label>
+        <div class="col-10">
+
+            <input class="form-control" type="text" formControlName="nombreUsuario" [class.is-invalid]="nombredeUsuarioNoValido">
+            <small *ngIf="nombredeUsuarioNoValido" class="text-danger">
+                    Es obligatorio ingresar el Apellido
+            </small>
+
+        </div>
+    </div>
+    <!--Formulario Espacio para correo-->
+    <div class="form-group row">
+        <label class="col-2 col-form-label">Correo</label>
+        <div class="col-10">
+
+            <input class="form-control" type="email" formControlName="email" [class.is-invalid]="emailNoValido">
+            <small *ngIf="emailNoValido" class="text-danger">
+              Ingrese el correo
+            </small>
+
+
+        </div>
+    </div>
+    <!--Formulario Espacio para Telefono -->
+    <div class="form-group row">
+        <label class="col-2 col-form-label">Télefono</label>
+        <div class="col-10">
+
+            <input class="form-control" type="text" formControlName="telefono" [class.is-invalid]="telefonoNoValido">
+            <small *ngIf="telefonoNoValido" class="text-danger">
+                    Ingrese un telefono
+            </small>
+
+        </div>
+    </div>
+    <!--Formulario Espacio para Interno -->
+    <div class="form-group row">
+        <label class="col-2 col-form-label">Interno</label>
+        <div class="col-10">
+            <input class="form-control" type="text" formControlName="interno">
+            <!-- <small *ngIf="internoNoValido" class="text-danger">
+                                 Ingrese un telefono
+             </small>-->
+        </div>
+    </div>
+    <!--Formulario Espacio para Contraseña -->
+    <div class="form-group row">
+        <label class="col-2 col-form-label">contraseña</label>
+        <div class="col-10">
+
+            <input class="form-control" type="password" formControlName="contrasena" [class.is-invalid]="contrasenaNoValido">
+            <small *ngIf="contrasenaNoValido" class="text-danger">
+                    Ingrese un Contraseña
+            </small>
+
+        </div>
+    </div>
+    <!--Formulario Espacio para Rol del Agente -->
+    <div class="form-group row">
+        <label class="col-2 col-form-label">Rol del Agente:</label>
+        <div class="col-10">
+            <select name="rol" class="form-control" formControlName="rol" [class.is-invalid]="rolNoValido">
+                    <option value="">-Seleccione un Rol</option>
+                    <option value='Admin'>Administrador</option>
+                    <option value='Vendedor'>Vendedor</option>
+                    <option value='Prod'>Producción</option>
+                </select>
+        </div>
+        <small *ngIf="rolNoValido" class="text-danger">
+                    Por favor seleccione un Rol 
+            </small>
+    </div>
+    <!--Datos del Formulario que si esta habilitado-->
+    <div class="form-group row">
+        <div class="form-group">
+            <div class="custom-control custom-switch">
+
+                <input type="checkbox" class="custom-control-input" id="customSwitch1" name="usuarioHabilitado" formControlName="usuarioHabilitado" />
+                <label class="custom-control-label" for="customSwitch1">Usuario Habilitado</label><br/>
+            </div>
+        </div>
+
+    </div>
+    <!--Datos de Baja Usuario-->
+    <div class="custom-control custom-switch">
+
+        <input type="checkbox" class="custom-control-input" id="customSwitch2" name="baja" formControlName="baja" />
+        <label class="custom-control-label" for="customSwitch2">baja</label><br/>
+    </div>
+    <!--Formulario Guradar submit -->
+    <div class="form-group row">
+        <label class="col-2 col-form-label">&nbsp;</label>
+        <div class="input-group col-md-10">
+            <button type="submit" class="btn btn-success" [disabled]="formaAgente.invalid">
+            Guardar
+          </button>
+        </div>
+    </div>
+
+</form>
+<pre>Nombre :{{formaAgente.value.nombre}}</pre>
+<pre>Apellido :{{formaAgente.value.apellido}}</pre>
+<pre>Nombre de Usuario:{{formaAgente.value.nombreUsuario}}</pre>
+<pre>Email :{{formaAgente.value.email}}</pre>
+<pre>Telefono:{{formaAgente.value.telefono}}</pre>
+<pre>Interno:{{formaAgente.value.interno}}</pre>
+<pre>Contraseña:{{formaAgente.value.contrasena}}</pre>
+<pre>baja:{{formaAgente.value.baja}}</pre>
+<pre>Rol:{{formaAgente.value.rol}}</pre>
+<pre>usuarioHabilitado:{{formaAgente.value.usuarioHabilitado}}</pre>
